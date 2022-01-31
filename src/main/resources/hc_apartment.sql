@@ -18,13 +18,11 @@ CREATE TABLE housing_apartment
 
 CREATE TABLE apartment_electricity
 (
-	Id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-	User				char(16),
-    Cooperative		 	char(16),
+	id 					BINARY(16) NOT NULL,
 	ApartmentUUID	 	BINARY(16),
 	Measurement			DOUBLE NOT NULL,
 	MeasureDate 		DATE,
-	PRIMARY KEY (Id),
+	PRIMARY KEY (id),
 	INDEX apartment_ind(ApartmentUUID),
             FOREIGN KEY (ApartmentUUID) REFERENCES housing_apartment(ApartmentUUID)
               ON DELETE NO ACTION
@@ -33,13 +31,12 @@ CREATE TABLE apartment_electricity
 
 CREATE TABLE apartment_water
 (
-	Id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-	UserUUID		char(16) NOT NULL,
+	id 				BINARY(16) NOT NULL,
 	ApartmentUUID 	BINARY(16),
 	CouldWater		DOUBLE NOT NULL,
 	HotWater		DOUBLE NOT NULL,
 	MeasureDate 	DATE,
-	PRIMARY KEY (Id),
+	PRIMARY KEY (id),
 	INDEX apartment_id(ApartmentUUID),
             FOREIGN KEY (ApartmentUUID) REFERENCES housing_apartment(ApartmentUUID)
               ON DELETE NO ACTION
