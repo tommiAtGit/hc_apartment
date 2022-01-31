@@ -1,6 +1,6 @@
 package com.myjava.housingapartment.domain;
 
-import java.util.Date;
+import java.sql.Timestamp;
 import java.util.UUID;
 
 import javax.persistence.CascadeType;
@@ -27,7 +27,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Builder
 @Entity
-public class HousingWater {
+public class ApartmentWater {
 	@Id
 	@GeneratedValue(generator="UUID")
 	@GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
@@ -41,5 +41,5 @@ public class HousingWater {
 	@Column(name = "HotWater")
 	private Double hotWater;
 	@Column(name = "MeasureDate")
-	private Date measurementDate;
+	private Timestamp measurementDate;
 }

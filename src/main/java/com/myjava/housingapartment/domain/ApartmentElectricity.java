@@ -1,6 +1,6 @@
 package com.myjava.housingapartment.domain;
 
-import java.util.Date;
+import java.sql.Timestamp;
 import java.util.UUID;
 
 import javax.persistence.CascadeType;
@@ -38,7 +38,7 @@ public class ApartmentElectricity {
 	@Column(name = "Measurement")
 	private Double measurement;
 	@Column(name = "MeasureDate")
-	private Date measurementDate;
+	private Timestamp measurementDate;
 	
 	
 }

@@ -1,6 +1,6 @@
 package com.myjava.housingapartment.web.model;
 
-import java.util.Date;
+import java.time.OffsetDateTime;
 import java.util.UUID;
 
 import com.myjava.housingapartment.domain.HousingApartment;
@@ -22,6 +22,6 @@ public class ApartmentElectricityDto {
 	
 	private Double measurement;
 	
-	private Date measurementDate;
+	private OffsetDateTime measurementDate;
 	
 }

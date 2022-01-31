@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class HousingApartmentDto {
 
-	private UUID ApartmentUUID;
+	private UUID apartmentUUID;
 	
 	private UUID cooperativeUUID;
 	
