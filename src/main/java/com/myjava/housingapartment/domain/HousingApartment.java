@@ -1,11 +1,14 @@
 package com.myjava.housingapartment.domain;
 
+import java.util.List;
 import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -21,6 +24,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Builder
 @Entity
+@Table(name="housing_apartment")
 public class HousingApartment {
 	
 	@Id
@@ -34,4 +38,9 @@ public class HousingApartment {
 	private UUID userUUID;
 	@Column(name="Apartment")
 	private String apartment;
+	@OneToMany(mappedBy = "apartment")
+	private List<ApartmentWater> apartmentWaters;
+	@OneToMany(mappedBy = "apartment")
+	private List<ApartmentElectricity> apartmentElectricitys;
+	
 }
