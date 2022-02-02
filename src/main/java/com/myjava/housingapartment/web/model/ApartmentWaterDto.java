@@ -16,7 +16,7 @@ public class ApartmentWaterDto {
 
 	private UUID id;
 	
-	private HousingApartmentDto apartment;
+	//private HousingApartmentDto apartment;
 	
 	private Double couldWater;
 	
