@@ -57,7 +57,7 @@ public class ApartmentMapper {
 		for (ApartmentWaterDto dto : dtos) {
 			ApartmentWater apartmentWater = ApartmentWater.builder()
 					.id(dto.getId())
-					//.apartment(mockApartment())
+					.apartmentUUID(dto.getApartmentUUID())
 					.couldWater(dto.getCouldWater())
 					.hotWater(dto.getHotWater())
 					.measurementDate(dateMapper.asTimestamp(dto.getMeasurementDate()))
@@ -74,7 +74,7 @@ public class ApartmentMapper {
 		for (ApartmentWater obj : waterObjs) {
 			ApartmentWaterDto apartmentWaterDto = ApartmentWaterDto.builder()
 					.id(obj.getId())
-					//.apartment(mockApartment())
+					.apartmentUUID(obj.getApartmentUUID())
 					.couldWater(obj.getCouldWater())
 					.hotWater(obj.getHotWater())
 					.measurementDate(dateMapper.asOffsetDateTime(obj.getMeasurementDate()))
@@ -90,6 +90,7 @@ public class ApartmentMapper {
 			
 			ApartmentElectricity electricity = ApartmentElectricity.builder()
 					.id(dto.getId())
+					.apartmentUUID(dto.getApartmentUUID())
 					.measurement(dto.getMeasurement())
 					.measurementDate(dateMapper.asTimestamp(dto.getMeasurementDate()))
 					.build();
@@ -105,6 +106,7 @@ public class ApartmentMapper {
 			
 			ApartmentElectricityDto electricityDto = ApartmentElectricityDto.builder()
 					.id(obj.getId())
+					.apartmentUUID(obj.getApartmentUUID())
 					.measurement(obj.getMeasurement())
 					.measurementDate(dateMapper.asOffsetDateTime(obj.getMeasurementDate()))
 					.build();

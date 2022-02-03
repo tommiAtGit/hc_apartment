@@ -38,7 +38,7 @@ class HealthCheckControllerTest {
 	void testAlive() {
 		
 		try {
-			mockMvc.perform(get("/api/housingapartment/health/")
+			mockMvc.perform(get("/api/hc_apartment/health/")
 					.accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
 		
 		} catch (Exception e) {

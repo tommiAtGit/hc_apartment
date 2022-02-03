@@ -99,7 +99,7 @@ class ApartmentMapperTest {
 		
 		ApartmentWater apartmentWater = ApartmentWater.builder()
 				.id(UUID.randomUUID())
-				//.apartment(mockApartment())
+				.apartmentUUID(UUID.randomUUID())
 				.couldWater(4321.0)
 				.hotWater(1234.0)
 				.measurementDate(new Timestamp(System.currentTimeMillis()))
@@ -134,7 +134,7 @@ class ApartmentMapperTest {
 		
 		ApartmentWaterDto apartmentWaterDto = ApartmentWaterDto.builder()
 				.id(UUID.randomUUID())
-				//.apartment(mockApartmentDto())
+				.apartmentUUID(UUID.randomUUID())
 				.couldWater(4321.0)
 				.hotWater(1234.0)
 				.measurementDate(OffsetDateTime.now())
@@ -161,7 +161,7 @@ class ApartmentMapperTest {
 		
 		ApartmentElectricity electricity = ApartmentElectricity.builder()
 				.id(UUID.randomUUID())
-				//.apartment(mockApartment())
+				.apartmentUUID(UUID.randomUUID())
 				.measurement(1234.0)
 				.measurementDate(new Timestamp(System.currentTimeMillis()))
 				.build();
@@ -173,7 +173,7 @@ class ApartmentMapperTest {
 		
 		ApartmentElectricityDto electricityDto = ApartmentElectricityDto.builder()
 				.id(UUID.randomUUID())
-				//.apartment(mockApartment())
+				.apartmentUUID(UUID.randomUUID())
 				.measurement(234.12)
 				.measurementDate(OffsetDateTime.now())
 				.build();

@@ -16,7 +16,7 @@ public class ApartmentElectricityDto {
 
 	private UUID id;
 	
-	//private HousingApartment apartment;
+	private UUID apartmentUUID;
 	
 	private Double measurement;
 	

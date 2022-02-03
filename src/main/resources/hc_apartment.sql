@@ -22,11 +22,7 @@ CREATE TABLE apartment_electricity
 	ApartmentUUID	 	BINARY(16),
 	Measurement			DOUBLE NOT NULL,
 	MeasureDate 		DATE,
-	PRIMARY KEY (id),
-	INDEX apartment_ind(ApartmentUUID),
-            FOREIGN KEY (ApartmentUUID) REFERENCES housing_apartment(ApartmentUUID)
-              ON DELETE NO ACTION
-              ON UPDATE NO ACTION
+	PRIMARY KEY (id)
 )ENGINE=INNODB;
 
 CREATE TABLE apartment_water
@@ -36,11 +32,7 @@ CREATE TABLE apartment_water
 	CouldWater		DOUBLE NOT NULL,
 	HotWater		DOUBLE NOT NULL,
 	MeasureDate 	DATE,
-	PRIMARY KEY (id),
-	INDEX apartment_id(ApartmentUUID),
-            FOREIGN KEY (ApartmentUUID) REFERENCES housing_apartment(ApartmentUUID)
-              ON DELETE NO ACTION
-              ON UPDATE NO ACTION
+	PRIMARY KEY (id)
 )ENGINE=INNODB;
 
 DESCRIBE housing_apartment;
