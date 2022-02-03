@@ -38,9 +38,9 @@ public class HousingApartment {
 	private UUID userUUID;
 	@Column(name="Apartment")
 	private String apartment;
-	@OneToMany(mappedBy = "apartment")
+	@OneToMany(mappedBy = "id")
 	private List<ApartmentWater> apartmentWaters;
-	@OneToMany(mappedBy = "apartment")
+	@OneToMany(mappedBy = "id")
 	private List<ApartmentElectricity> apartmentElectricitys;
 	
 }

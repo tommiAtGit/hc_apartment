@@ -30,9 +30,8 @@ public class ApartmentElectricity {
 	@GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
 	@Column(length = 16, columnDefinition = "BINARY(16)", updatable = false, nullable = false)
 	private UUID id;
-	//@ManyToOne(targetEntity = HousingApartment.class, fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-	//@JoinColumn(nullable = false, name = "ApartmentUUID")
-	//private HousingApartment apartment;
+	@Column(name = "ApartmentUUID")
+	private UUID apartmentUUID;
 	@Column(name = "Measurement")
 	private Double measurement;
 	@Column(name = "MeasureDate")
