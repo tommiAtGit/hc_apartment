@@ -5,13 +5,14 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.myjava.housingapartment.domain.HousingApartment;
 import com.myjava.housingapartment.repositories.HousingApartmentRepository;
 import com.myjava.housingapartment.web.mappers.ApartmentMapper;
 import com.myjava.housingapartment.web.model.HousingApartmentDto;
 
-
+@Service
 public class ApartmentServiceImpl implements ApartmentService {
 
 	@Autowired
@@ -46,8 +47,12 @@ public class ApartmentServiceImpl implements ApartmentService {
 
 
 	@Override
-	public void deleteHosingApartment(UUID ApartmentUUID) {
-		// TODO Auto-generated method stub
+	public void deleteHosingApartment(UUID apartmentUUID) {
+		
+		if (apartmentUUID != null) {
+			HousingApartment apartment = repository.findById(apartmentUUID).orElseThrow();
+			repository.delete(apartment);
+		}
 		
 	}
 

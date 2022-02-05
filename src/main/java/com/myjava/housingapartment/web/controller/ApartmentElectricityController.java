@@ -1,5 +1,5 @@
 package com.myjava.housingapartment.web.controller;
 
-public class HousingApartmentController {
+public class ApartmentElectricityController {
 
 }
