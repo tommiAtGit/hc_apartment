@@ -39,4 +39,5 @@ public class ApartmentWater {
 	private Double hotWater;
 	@Column(name = "MeasureDate")
 	private Timestamp measurementDate;
+	
 }
