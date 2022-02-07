@@ -26,17 +26,20 @@ public class ApartmentMockLibrary {
 /////////////////
 
 	public HousingApartment mockApartment() {
-		HousingApartment apartment = HousingApartment.builder().apartmentUUID(UUID.randomUUID())
-				.cooperativeUUID(UUID.randomUUID()).userUUID(UUID.randomUUID()).apartment("3B")
-				.apartmentWaters(mockApartmentWaters()).apartmentElectricitys(mockApartmentElectrisityes()).build();
+		HousingApartment apartment = HousingApartment.builder()
+				.apartmentUUID(UUID.randomUUID())
+				.cooperativeUUID(UUID.randomUUID())
+				.userUUID(UUID.randomUUID()).apartment("3B")
+				.build();
 		return apartment;
 	}
 
 	public HousingApartmentDto mockApartmentDto() {
-		HousingApartmentDto housingApartmentDto = HousingApartmentDto.builder().apartmentUUID(UUID.randomUUID())
-				.cooperativeUUID(UUID.randomUUID()).userUUID(UUID.randomUUID()).apartment("3B")
-				.apartmentWaterDtos(mockApartmentWaterDtos()).apartmentElectricityDtos(apartmentElectricityDtos())
-
+		HousingApartmentDto housingApartmentDto = HousingApartmentDto.builder()
+				.apartmentUUID(UUID.randomUUID())
+				.cooperativeUUID(UUID.randomUUID())
+				.userUUID(UUID.randomUUID())
+				.apartment("3B")
 				.build();
 		return housingApartmentDto;
 	}
@@ -59,8 +62,26 @@ public class ApartmentMockLibrary {
 
 	public ApartmentWater mockApartmentWater() {
 
-		ApartmentWater apartmentWater = ApartmentWater.builder().id(UUID.randomUUID()).apartmentUUID(UUID.randomUUID())
-				.couldWater(4321.0).hotWater(1234.0).measurementDate(new Timestamp(System.currentTimeMillis())).build();
+		ApartmentWater apartmentWater = ApartmentWater.builder()
+				.id(UUID.randomUUID())
+				.couldWater(4321.0)
+				.hotWater(1234.0)
+				.measurementDate(new Timestamp(System.currentTimeMillis()))
+				.apartment(mockApartment())
+				.build();
+
+		return apartmentWater;
+	}
+	
+	public ApartmentWater mockApartmentWater(HousingApartment apartment) {
+
+		ApartmentWater apartmentWater = ApartmentWater.builder()
+				.id(UUID.randomUUID())
+				.couldWater(4321.0)
+				.hotWater(1234.0)
+				.measurementDate(new Timestamp(System.currentTimeMillis()))
+				.apartment(apartment)
+				.build();
 
 		return apartmentWater;
 	}
@@ -89,9 +110,12 @@ public class ApartmentMockLibrary {
 
 	public ApartmentWaterDto mockApartmentWaterDto() {
 
-		ApartmentWaterDto apartmentWaterDto = ApartmentWaterDto.builder().id(UUID.randomUUID())
-				.apartmentUUID(UUID.randomUUID()).couldWater(4321.0).hotWater(1234.0)
-				.measurementDate(OffsetDateTime.now()).build();
+		ApartmentWaterDto apartmentWaterDto = ApartmentWaterDto.builder()
+				.id(UUID.randomUUID())
+				.couldWater(4321.0)
+				.hotWater(1234.0)
+				.measurementDate(OffsetDateTime.now())
+				.build();
 
 		return apartmentWaterDto;
 	}
@@ -111,17 +135,22 @@ public class ApartmentMockLibrary {
 
 	public ApartmentElectricity mockApartmentElectricity() {
 
-		ApartmentElectricity electricity = ApartmentElectricity.builder().id(UUID.randomUUID())
-				.apartmentUUID(UUID.randomUUID()).measurement(1234.0)
-				.measurementDate(new Timestamp(System.currentTimeMillis())).build();
+		ApartmentElectricity electricity = ApartmentElectricity.builder()
+				.id(UUID.randomUUID())
+				.measurement(1234.0)
+				.measurementDate(new Timestamp(System.currentTimeMillis()))
+				.build();
 
 		return electricity;
 	}
 
 	public ApartmentElectricityDto mockApartmentElectricityDto() {
 
-		ApartmentElectricityDto electricityDto = ApartmentElectricityDto.builder().id(UUID.randomUUID())
-				.apartmentUUID(UUID.randomUUID()).measurement(234.12).measurementDate(OffsetDateTime.now()).build();
+		ApartmentElectricityDto electricityDto = ApartmentElectricityDto.builder()
+				.id(UUID.randomUUID())
+				.measurement(234.12)
+				.measurementDate(OffsetDateTime.now())
+				.build();
 
 		return electricityDto;
 	}

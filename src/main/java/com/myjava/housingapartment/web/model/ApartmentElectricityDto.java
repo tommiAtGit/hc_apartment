@@ -16,10 +16,11 @@ public class ApartmentElectricityDto {
 
 	private UUID id;
 	
-	private UUID apartmentUUID;
-	
 	private Double measurement;
 	
 	private OffsetDateTime measurementDate;
+	
+	private HousingApartmentDto hc_apartment;
+	
 	
 }
