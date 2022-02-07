@@ -16,11 +16,11 @@ public class ApartmentWaterDto {
 
 	private UUID id;
 	
-	private UUID apartmentUUID;
-	
 	private Double couldWater;
 	
 	private Double hotWater;
 	
 	private OffsetDateTime measurementDate;
+	
+	private HousingApartmentDto hc_apartment;
 }

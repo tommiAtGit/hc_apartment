@@ -1,6 +1,5 @@
 package com.myjava.housingapartment.web.model;
 
-import java.util.List;
 import java.util.UUID;
 
 import lombok.AllArgsConstructor;
@@ -22,7 +21,5 @@ public class HousingApartmentDto {
 	
 	private String apartment;
 	
-	private List<ApartmentWaterDto> apartmentWaterDtos;
 	
-	private List<ApartmentElectricityDto> apartmentElectricityDtos;
 }

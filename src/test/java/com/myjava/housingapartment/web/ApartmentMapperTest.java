@@ -50,8 +50,7 @@ class ApartmentMapperTest {
 		HousingApartment apartmentObj = apartmentMapper.mapDtoToObject(actualApartmentDto);
 		assertNotNull(apartmentObj);
 		assertEquals(actualApartmentDto.getApartmentUUID(),apartmentObj.getApartmentUUID());
-		assertTrue(1 < apartmentObj.getApartmentElectricitys().size());
-		assertTrue(1<apartmentObj.getApartmentWaters().size());
+		
 	}
 	
 	@Test
@@ -61,8 +60,7 @@ class ApartmentMapperTest {
 		HousingApartmentDto apartmentDto = apartmentMapper.mapObjectToDto(actualApartment);
 		assertNotNull(apartmentDto);
 		assertEquals(actualApartment.getApartmentUUID(),apartmentDto.getApartmentUUID());
-		assertTrue(1< apartmentDto.getApartmentElectricityDtos().size());
-		assertTrue(1< apartmentDto.getApartmentWaterDtos().size());
+		
 		
 	}
 }
