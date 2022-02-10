@@ -20,6 +20,7 @@ public class ApartmentServiceImpl implements ApartmentService {
 	@Autowired
 	HousingApartmentRepository repository;
 	
+	
 	@Override
 	public HousingApartmentDto addHousingAparment(HousingApartmentDto apartmentDto) {
 		

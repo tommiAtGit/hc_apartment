@@ -45,64 +45,48 @@ public class ApartmentMapper {
 		return housingApartmentDto;
 	}
 	
-	private List<ApartmentWater> mapWaterDtoToObject(List<ApartmentWaterDto> dtos){
+	
+	public ApartmentWater mapWaterDtoToObject(ApartmentWaterDto dto){
 		
-		List<ApartmentWater> waters = new ArrayList<>();
-		
-		for (ApartmentWaterDto dto : dtos) {
 			ApartmentWater apartmentWater = ApartmentWater.builder()
 					.id(dto.getId())
 					.couldWater(dto.getCouldWater())
 					.hotWater(dto.getHotWater())
 					.measurementDate(dateMapper.asTimestamp(dto.getMeasurementDate()))
 					.build();
-			waters.add(apartmentWater);
-		}
-		return waters;
+		
+		return apartmentWater;
 	}
 	
-	private List<ApartmentWaterDto> mapWaterObjectToDto(List<ApartmentWater> waterObjs){
+	public ApartmentWaterDto mapWaterObjectToDto(ApartmentWater waterObjs){
 		
-		List<ApartmentWaterDto> waterDtos = new ArrayList<>();
-		
-		for (ApartmentWater obj : waterObjs) {
 			ApartmentWaterDto apartmentWaterDto = ApartmentWaterDto.builder()
-					.id(obj.getId())
-					.couldWater(obj.getCouldWater())
-					.hotWater(obj.getHotWater())
-					.measurementDate(dateMapper.asOffsetDateTime(obj.getMeasurementDate()))
+					.id(waterObjs.getId())
+					.couldWater(waterObjs.getCouldWater())
+					.hotWater(waterObjs.getHotWater())
+					.measurementDate(dateMapper.asOffsetDateTime(waterObjs.getMeasurementDate()))
 					.build();
-					waterDtos.add(apartmentWaterDto);
-		}
-		return waterDtos;
+		return apartmentWaterDto;
 	}
 	
-	private List<ApartmentElectricity>mapElectricityDtoToObject(List<ApartmentElectricityDto> dtos){
-		List<ApartmentElectricity> electrisities = new ArrayList<>();
-		for (ApartmentElectricityDto dto:dtos) {
-			
-			ApartmentElectricity electricity = ApartmentElectricity.builder()
+	public ApartmentElectricity mapElectricityDtoToObject(ApartmentElectricityDto dto){
+		
+		
+			return ApartmentElectricity.builder()
 					.id(dto.getId())
 					.measurement(dto.getMeasurement())
 					.measurementDate(dateMapper.asTimestamp(dto.getMeasurementDate()))
 					.build();
-			electrisities.add(electricity);
-		}
-		return electrisities;
 	}
 	
-	private List<ApartmentElectricityDto>mapElectricityObjectToDto(List<ApartmentElectricity> objs){
-		List<ApartmentElectricityDto> electrisityDtos = new ArrayList<>();
+	public ApartmentElectricityDto mapElectricityObjectToDto(ApartmentElectricity obj){
 		
-		for (ApartmentElectricity obj:objs) {
-			
-			ApartmentElectricityDto electricityDto = ApartmentElectricityDto.builder()
+			return ApartmentElectricityDto.builder()
 					.id(obj.getId())
 					.measurement(obj.getMeasurement())
 					.measurementDate(dateMapper.asOffsetDateTime(obj.getMeasurementDate()))
 					.build();
-			electrisityDtos.add(electricityDto);
-		}
-		return electrisityDtos;
+			
+		
 	}
 }
