@@ -139,6 +139,7 @@ public class ApartmentMockLibrary {
 				.id(UUID.randomUUID())
 				.measurement(1234.0)
 				.measurementDate(new Timestamp(System.currentTimeMillis()))
+				.apartment(this.mockApartment())
 				.build();
 
 		return electricity;
@@ -150,6 +151,7 @@ public class ApartmentMockLibrary {
 				.id(UUID.randomUUID())
 				.measurement(234.12)
 				.measurementDate(OffsetDateTime.now())
+				.hc_apartment(this.mockApartmentDto())
 				.build();
 
 		return electricityDto;

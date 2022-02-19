@@ -18,7 +18,6 @@ CREATE TABLE housing_apartment
 CREATE TABLE apartment_electricity
 (
 	id 					BINARY(16) NOT NULL,
-	ApartmentUUID	 	BINARY(16),
 	Measurement			DOUBLE NOT NULL,
 	MeasureDate 		DATE,
 	apartment_uuid		BINARY(16),
