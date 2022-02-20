@@ -18,15 +18,15 @@ CREATE TABLE housing_apartment
 CREATE TABLE apartment_electricity
 (
 	id 					BINARY(16) NOT NULL,
-	ApartmentUUID	 	BINARY(16),
 	Measurement			DOUBLE NOT NULL,
 	MeasureDate 		DATE,
 	apartment_uuid		BINARY(16),
-	 INDEX user_ind(apartment_uuid),
+	PRIMARY KEY (id),
+	INDEX user_ind(apartment_uuid),
 	        FOREIGN KEY (apartment_uuid) REFERENCES housing_apartment(ApartmentUUID)
 	          ON DELETE CASCADE
 	          ON UPDATE NO ACTION
-	PRIMARY KEY (id)
+	
 )ENGINE=INNODB;
 
 CREATE TABLE apartment_water
@@ -36,12 +36,13 @@ CREATE TABLE apartment_water
 	CouldWater		DOUBLE NOT NULL,
 	HotWater		DOUBLE NOT NULL,
 	MeasureDate 	DATE,
+	PRIMARY KEY (id),
 	apartment_uuid		BINARY(16),
 		 INDEX user_ind(apartment_uuid),
 	        FOREIGN KEY (apartment_uuid) REFERENCES housing_apartment(ApartmentUUID)
 	          ON DELETE CASCADE
 	          ON UPDATE NO ACTION
-	PRIMARY KEY (id)
+	
 )ENGINE=INNODB;
 
 DESCRIBE housing_apartment;

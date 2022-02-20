@@ -7,8 +7,9 @@ import com.myjava.housingapartment.web.model.ApartmentElectricityDto;
 
 public interface ApartmentElectricityService {
 
-	ApartmentElectricityDto addApartmentElectricity(ApartmentElectricityDto electricityDto);
-	ApartmentElectricityDto updateApartmentElectricity(ApartmentElectricityDto apartmentElectricity);
+	ApartmentElectricityDto addApartmentElectricity(UUID apartmentUUID, ApartmentElectricityDto electricityDto);
+	ApartmentElectricityDto updateApartmentElectricity(UUID apartmentUUID, UUID electricityId, ApartmentElectricityDto apartmentElectricity);
 	List<ApartmentElectricityDto> getApartmentElecricity(UUID apartmentUUID);
-	void deleteApartmentElectricity(UUID electricityUUID);
+	Boolean deleteApartmentElectricity(UUID electricityUUID);
+	
 }
