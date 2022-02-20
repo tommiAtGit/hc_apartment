@@ -64,7 +64,7 @@ class ApartmentElectricityControllerTest {
 		
 		given(service.addApartmentElectricity(any(),any())).willReturn(lib.mockApartmentElectricityDto());
 
-		mockMvc.perform(post("/api/apartmentelectricity/apartment/" + UUID.randomUUID() + "/electricity").contentType(MediaType.APPLICATION_JSON).content(apartmentJson))
+		mockMvc.perform(post("/api/apartmentelectricity/apartment/" + UUID.randomUUID()).contentType(MediaType.APPLICATION_JSON).content(apartmentJson))
 				.andExpect(status().isCreated());
 	}
 

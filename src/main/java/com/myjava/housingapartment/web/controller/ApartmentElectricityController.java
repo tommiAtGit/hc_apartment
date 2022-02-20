@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,8 +31,8 @@ public class ApartmentElectricityController {
 	@Autowired
 	ApartmentElectricityService service;
 
-	@PostMapping("apartment/{apartmentId}/electricity")
-	ResponseEntity<ApartmentElectricityDto> addNewElectricity(@PathVariable (value = "apartmentId") UUID apartmentId,
+	@PostMapping("apartment/{apartmentId}")
+	public ResponseEntity<ApartmentElectricityDto> addNewElectricity(@PathVariable (value = "apartmentId") UUID apartmentId,
 			@Valid @RequestBody ApartmentElectricityDto eDto) {
 		
 		if (apartmentId != null) {
@@ -43,12 +44,10 @@ public class ApartmentElectricityController {
 			return null;
 		}
 		
-		
-		
 	}
 	
 	@GetMapping("apartment/{apartmentId}")
-	ResponseEntity<List<ApartmentElectricityDto>>getElectricityByApartment(@PathVariable (value = "apartmentId") UUID apartmentId){
+	public ResponseEntity<List<ApartmentElectricityDto>>getElectricityByApartment(@PathVariable (value = "apartmentId") UUID apartmentId){
 		log.info("Finding apartment electricity by apartment id: " + apartmentId);
 		
 		return new ResponseEntity<List<ApartmentElectricityDto>>(service.getApartmentElecricity(apartmentId),HttpStatus.OK);
@@ -57,7 +56,7 @@ public class ApartmentElectricityController {
 	
 	
 	@PutMapping("apartment/{apartmentId}/electricity/{electricityId}")
-	ResponseEntity<ApartmentElectricityDto>updateElectricity(@PathVariable (value = "apartmentId") UUID apartmentId,
+	public ResponseEntity<ApartmentElectricityDto>updateElectricity(@PathVariable (value = "apartmentId") UUID apartmentId,
 			@PathVariable (value = "electricityId") UUID electricityId,
 			@Valid @RequestBody ApartmentElectricityDto eDto ){
 		
@@ -65,5 +64,19 @@ public class ApartmentElectricityController {
 		return new ResponseEntity<ApartmentElectricityDto>(service.updateApartmentElectricity(apartmentId, electricityId, eDto),HttpStatus.ACCEPTED);
 	}
 	
+	@DeleteMapping("electricity/{electricityId}")
+	public ResponseEntity<UUID> deleteElectricity(@PathVariable (value = "electricityId") UUID electricityId){
+		
+		log.info("Deleting electricity with id: " + electricityId);
+		
+		var isRemoved = service.deleteApartmentElectricity(electricityId);
+		
+		if (!isRemoved) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<>(electricityId, HttpStatus.OK);
+		
+	}
 	
 }

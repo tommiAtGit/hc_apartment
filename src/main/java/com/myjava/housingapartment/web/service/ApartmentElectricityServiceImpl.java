@@ -39,6 +39,7 @@ public class ApartmentElectricityServiceImpl implements ApartmentElectricityServ
 	@Override
 	public ApartmentElectricityDto addApartmentElectricity(UUID apartmentUUID, ApartmentElectricityDto electricityDto) {
 		
+		
 		electricityDto.setHc_apartment(mapper.mapObjectToDto(apartmentRepository.findById(apartmentUUID).orElseThrow()));
 		
 		return mapper.mapElectricityObjectToDto(
@@ -72,9 +73,16 @@ public class ApartmentElectricityServiceImpl implements ApartmentElectricityServ
 	}
 
 	@Override
-	public void deleteApartmentElectricity(UUID electricityUUID) {
-		// TODO Auto-generated method stub
+	public Boolean deleteApartmentElectricity(UUID electricityUUID) {
 		
+		
+		try {
+			electricityRepository.deleteById(electricityUUID);
+			return true;
+		} catch (Exception e) {
+			log.error("Error occured while deleleting apartment electricity entity. " + e.getMessage());
+			return false;
+		}
 	}
 
 	@Override

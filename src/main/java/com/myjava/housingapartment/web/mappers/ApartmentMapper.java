@@ -2,8 +2,6 @@ package com.myjava.housingapartment.web.mappers;
 
 
 
-import java.util.ArrayList;
-import java.util.List;
 import org.springframework.stereotype.Component;
 
 import com.myjava.housingapartment.domain.ApartmentElectricity;
@@ -76,6 +74,7 @@ public class ApartmentMapper {
 					.id(dto.getId())
 					.measurement(dto.getMeasurement())
 					.measurementDate(dateMapper.asTimestamp(dto.getMeasurementDate()))
+					.apartment(this.mapDtoToObject(dto.getHc_apartment()))
 					.build();
 	}
 	
@@ -85,6 +84,7 @@ public class ApartmentMapper {
 					.id(obj.getId())
 					.measurement(obj.getMeasurement())
 					.measurementDate(dateMapper.asOffsetDateTime(obj.getMeasurementDate()))
+					.hc_apartment(this.mapObjectToDto(obj.getApartment()))
 					.build();
 			
 		
