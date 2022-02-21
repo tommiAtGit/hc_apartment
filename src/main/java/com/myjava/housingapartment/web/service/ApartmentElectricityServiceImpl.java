@@ -97,7 +97,7 @@ public class ApartmentElectricityServiceImpl implements ApartmentElectricityServ
 		return mapper.mapElectricityObjectToDto(electricityRepository.findById(apartmentUUID).map(electricity -> {
 			electricity.setMeasurement(apartmentElectricity.getMeasurement());
             return electricityRepository.save(electricity);
-        }).orElseThrow(() -> new ResourceNotFoundException("CommentId " + electricityId + "not found")));
+        }).orElseThrow(() -> new ResourceNotFoundException("Electricity with id " + electricityId + "not found")));
 
 	}
 
