@@ -22,12 +22,12 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.myjava.housingapartment.test.utils.ApartmentMockLibrary;
-import com.myjava.housingapartment.web.service.ApartmentElectricityService;
-import lombok.extern.slf4j.Slf4j;
+import com.myjava.housingapartment.web.service.ApartmentWaterService;
 
+import lombok.extern.slf4j.Slf4j;
 @Slf4j
-@WebMvcTest(ApartmentElectricityController.class)
-class ApartmentElectricityControllerTest {
+@WebMvcTest(ApartmentWaterController.class)
+class ApartmentWaterControllerTest {
 
 	@Autowired
 	MockMvc mockMvc;
@@ -39,48 +39,45 @@ class ApartmentElectricityControllerTest {
 	ApartmentMockLibrary lib = null;
 
 	@MockBean
-	ApartmentElectricityService service;
+	ApartmentWaterService service;
 	
 	@BeforeEach
 	void setUp() throws Exception {
 		
 		lib = new ApartmentMockLibrary();
 	}
-	
 
 	@AfterEach
 	void tearDown() throws Exception {
 	}
 
 	@Test
-	void getApartmentElectricityByApartmentIdTest() throws Exception {
-		given(service.getApartmentElecricity(any())).willReturn(lib.mockApartmentElectricityDtos());
+	void getApartmentWaterByApartmentIdTest() throws Exception {
+		given(service.getApartmentWater(any())).willReturn(lib.mockApartmentWaterDtos());
 		
-		mockMvc.perform(get("/api/apartmentelectricity/apartment/" + UUID.randomUUID())
-				.accept(MediaType.APPLICATION_JSON))
-				.andExpect(status()
-				.isOk());
+		mockMvc.perform(get("/api/apartmentwater/apartment/" + UUID.randomUUID()).accept(MediaType.APPLICATION_JSON))
+		.andExpect(status().isOk());
 	}
 	
 	@Test
 	void addNewApartmentElectricityTest() throws Exception {
-		String apartmentJson = objectMapper.writeValueAsString(lib.mockApartmentElectricityDto());
+		String apartmentJson = objectMapper.writeValueAsString(lib.mockApartmentWaterDto());
 		log.info(apartmentJson);
 		
-		given(service.addApartmentElectricity(any(),any())).willReturn(lib.mockApartmentElectricityDto());
+		given(service.addApartmentWater(any(),any())).willReturn(lib.mockApartmentWaterDto());
 
-		mockMvc.perform(post("/api/apartmentelectricity/apartment/" + UUID.randomUUID()).contentType(MediaType.APPLICATION_JSON).content(apartmentJson))
+		mockMvc.perform(post("/api/apartmentwater/apartment/" + UUID.randomUUID()).contentType(MediaType.APPLICATION_JSON).content(apartmentJson))
 				.andExpect(status().isCreated());
 	}
 	
 	@Test
 	void updateApartmentElectricityTest()throws Exception{
-		String apartmentJson = objectMapper.writeValueAsString(lib.mockApartmentElectricityDto());
+		String apartmentJson = objectMapper.writeValueAsString(lib.mockApartmentWaterDto());
 		log.info(apartmentJson);
 		
-		given(service.updateApartmentElectricity(any(), any(), any())).willReturn(lib.mockApartmentElectricityDto());
+		given(service.updateApartmetWater(any(), any(), any())).willReturn(lib.mockApartmentWaterDto());
 		
-		mockMvc.perform(put("/api/apartmentelectricity/apartment/"+UUID.randomUUID()+"/electricity/" + UUID.randomUUID())
+		mockMvc.perform(put("/api/apartmentwater/apartment/"+UUID.randomUUID()+"/water/" + UUID.randomUUID())
 				.contentType(MediaType.APPLICATION_JSON).content(apartmentJson))
 				.andExpect(status()
 				.isAccepted());
@@ -90,9 +87,9 @@ class ApartmentElectricityControllerTest {
 	@Test
 	void deleteApartmentElectricityTest() throws Exception{
 		
-		when(service.deleteApartmentElectricity(any())).thenReturn(true);
+		when(service.deleteApartmentWater(any())).thenReturn(true);
 		
-		mockMvc.perform(delete("/api/apartmentelectricity/electricity/" + UUID.randomUUID())
+		mockMvc.perform(delete("/api/apartmentwater/water/" + UUID.randomUUID())
 				.accept(MediaType.APPLICATION_JSON))
 				.andExpect(status()
 				.isOk());
@@ -100,15 +97,17 @@ class ApartmentElectricityControllerTest {
 	}
 	
 	@Test
-	void deleteApartmentElectricityNotFoundTest() throws Exception{
+	void deleteApartmentWaterNotFoundTest() throws Exception{
 		
-		when(service.deleteApartmentElectricity(any())).thenReturn(false);
+		when(service.deleteApartmentWater(any())).thenReturn(false);
 		
-		mockMvc.perform(delete("/api/apartmentelectricity/electricity/" + UUID.randomUUID())
+		mockMvc.perform(delete("/api/apartmentwater/water/" + UUID.randomUUID())
 				.accept(MediaType.APPLICATION_JSON))
 				.andExpect(status()
 				.isNotFound());
 		
 	}
+	
+	
 
 }

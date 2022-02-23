@@ -41,7 +41,7 @@ public class ApartmentWaterController {
 			return new ResponseEntity<ApartmentWaterDto>(service.addApartmentWater(apartmentId, waterDto) ,HttpStatus.CREATED);
 		}
 		else {
-			log.info("Error occured while creating new apartment electricity entity: Missing appartment id");
+			log.info("Error occured while creating new apartment water entity: Missing appartment id");
 			return null;
 		}
 	}
@@ -63,10 +63,10 @@ public class ApartmentWaterController {
 		return new ResponseEntity<ApartmentWaterDto>(service.updateApartmetWater(apartmentId, waterId, waterDto),HttpStatus.ACCEPTED);
 	}
 	
-	@DeleteMapping("electricity/{waterId}")
+	@DeleteMapping("water/{waterId}")
 	public ResponseEntity<UUID> deleteElectricity(@PathVariable (value = "waterId") UUID waterId){
 		
-		log.info("Deleting electricity with id: " + waterId);
+		log.info("Deleting water with id: " + waterId);
 		
 		var isRemoved = service.deleteApartmentWater(waterId);
 		
