@@ -51,18 +51,20 @@ public class ApartmentMapper {
 					.couldWater(dto.getCouldWater())
 					.hotWater(dto.getHotWater())
 					.measurementDate(dateMapper.asTimestamp(dto.getMeasurementDate()))
+					.apartment(this.mapDtoToObject(dto.getHc_apartment()))
 					.build();
 		
 		return apartmentWater;
 	}
 	
-	public ApartmentWaterDto mapWaterObjectToDto(ApartmentWater waterObjs){
+	public ApartmentWaterDto mapWaterObjectToDto(ApartmentWater waterObj){
 		
 			ApartmentWaterDto apartmentWaterDto = ApartmentWaterDto.builder()
-					.id(waterObjs.getId())
-					.couldWater(waterObjs.getCouldWater())
-					.hotWater(waterObjs.getHotWater())
-					.measurementDate(dateMapper.asOffsetDateTime(waterObjs.getMeasurementDate()))
+					.id(waterObj.getId())
+					.couldWater(waterObj.getCouldWater())
+					.hotWater(waterObj.getHotWater())
+					.measurementDate(dateMapper.asOffsetDateTime(waterObj.getMeasurementDate()))
+					.hc_apartment(this.mapObjectToDto(waterObj.getApartment()))
 					.build();
 		return apartmentWaterDto;
 	}

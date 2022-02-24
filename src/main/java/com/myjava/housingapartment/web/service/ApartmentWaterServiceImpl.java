@@ -39,9 +39,16 @@ public class ApartmentWaterServiceImpl implements ApartmentWaterService{
 		
 		waterDto.setHc_apartment(mapper.mapObjectToDto(apartmentRepository.findById(apartmentUUID).orElseThrow()));
 		
-		return mapper.mapWaterObjectToDto(
-				apartmenWaterRepository.save(
-						mapper.mapWaterDtoToObject(waterDto)));
+		if (waterDto.getCouldWater() != null) {
+			return mapper.mapWaterObjectToDto(
+					apartmenWaterRepository.save(
+							mapper.mapWaterDtoToObject(waterDto)));	
+		}
+		else {
+			log.error("Apartment" + apartmentUUID + " not found");
+			throw new ResourceNotFoundException(" Apartment" + apartmentUUID + " not found"); 
+		}
+		
 				
 	}
 
