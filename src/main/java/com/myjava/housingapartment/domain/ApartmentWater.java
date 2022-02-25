@@ -37,11 +37,11 @@ public class ApartmentWater {
 	@GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
 	@Column(length = 16, columnDefinition = "BINARY(16)", updatable = false, nullable = false)
 	private UUID id;
-	@Column(name = "CouldWater")
+	@Column(name = "could_water")
 	private Double couldWater;
-	@Column(name = "HotWater")
+	@Column(name = "hot_water")
 	private Double hotWater;
-	@Column(name = "MeasureDate")
+	@Column(name = "measure_date")
 	private Timestamp measurementDate;
 	 @ManyToOne(fetch = FetchType.LAZY, optional = false)
 	 @JoinColumn(name = "apartment_uuid", nullable = false)

@@ -157,7 +157,7 @@ public class ApartmentMockLibrary {
 		return electricityDto;
 	}
 
-	public List<ApartmentElectricityDto> apartmentElectricityDtos() {
+	public List<ApartmentElectricityDto> mockApartmentElectricityDtos() {
 		List<ApartmentElectricityDto> electrisityDtos = new ArrayList<>();
 
 		for (int i = 0; i < CHILD_COUNT; i++) {
