@@ -54,13 +54,14 @@ public class ApartmentWaterController {
 		
 	}
 	
-	@PutMapping("apartment/{apartmentId}/water/{waterId}")
-	public ResponseEntity<ApartmentWaterDto>updateElectricity(@PathVariable (value = "apartmentId") UUID apartmentId,
+	@PutMapping("apartment/water/{waterId}")
+	public ResponseEntity<ApartmentWaterDto>updateWater(
 			@PathVariable (value = "waterId") UUID waterId,
 			@Valid @RequestBody ApartmentWaterDto waterDto ){
 		
-		log.info("Edit apartment electricity id: " + apartmentId);
-		return new ResponseEntity<ApartmentWaterDto>(service.updateApartmetWater(apartmentId, waterId, waterDto),HttpStatus.ACCEPTED);
+		
+		log.info("Edit entity with electricity id: " + waterId);
+		return new ResponseEntity<ApartmentWaterDto>(service.updateApartmetWater( waterId, waterDto),HttpStatus.ACCEPTED);
 	}
 	
 	@DeleteMapping("water/{waterId}")

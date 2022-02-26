@@ -2,24 +2,12 @@ package com.myjava.housingapartment.web;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.sql.Timestamp;
-import java.time.OffsetDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import com.myjava.housingapartment.domain.ApartmentElectricity;
-import com.myjava.housingapartment.domain.ApartmentWater;
 import com.myjava.housingapartment.domain.HousingApartment;
 import com.myjava.housingapartment.test.utils.ApartmentMockLibrary;
 import com.myjava.housingapartment.web.mappers.ApartmentMapper;
-import com.myjava.housingapartment.web.model.ApartmentElectricityDto;
-import com.myjava.housingapartment.web.model.ApartmentWaterDto;
 import com.myjava.housingapartment.web.model.HousingApartmentDto;
 
 

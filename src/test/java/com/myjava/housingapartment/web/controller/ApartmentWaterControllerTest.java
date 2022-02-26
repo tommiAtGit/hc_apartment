@@ -60,7 +60,7 @@ class ApartmentWaterControllerTest {
 	}
 	
 	@Test
-	void addNewApartmentElectricityTest() throws Exception {
+	void addNewApartmentWaterTest() throws Exception {
 		String apartmentJson = objectMapper.writeValueAsString(lib.mockApartmentWaterDto());
 		log.info(apartmentJson);
 		
@@ -71,13 +71,13 @@ class ApartmentWaterControllerTest {
 	}
 	
 	@Test
-	void updateApartmentElectricityTest()throws Exception{
+	void updateApartmentWaterTest()throws Exception{
 		String apartmentJson = objectMapper.writeValueAsString(lib.mockApartmentWaterDto());
 		log.info(apartmentJson);
 		
-		given(service.updateApartmetWater(any(), any(), any())).willReturn(lib.mockApartmentWaterDto());
+		given(service.updateApartmetWater(any(), any())).willReturn(lib.mockApartmentWaterDto());
 		
-		mockMvc.perform(put("/api/apartmentwater/apartment/"+UUID.randomUUID()+"/water/" + UUID.randomUUID())
+		mockMvc.perform(put("/api/apartmentwater/apartment/water/" + UUID.randomUUID())
 				.contentType(MediaType.APPLICATION_JSON).content(apartmentJson))
 				.andExpect(status()
 				.isAccepted());
@@ -85,7 +85,7 @@ class ApartmentWaterControllerTest {
 	}
 	
 	@Test
-	void deleteApartmentElectricityTest() throws Exception{
+	void deleteApartmentWaterTest() throws Exception{
 		
 		when(service.deleteApartmentWater(any())).thenReturn(true);
 		
