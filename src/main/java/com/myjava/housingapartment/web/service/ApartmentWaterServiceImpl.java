@@ -13,6 +13,7 @@ import com.myjava.housingapartment.repositories.ApartmentWaterRepository;
 import com.myjava.housingapartment.repositories.HousingApartmentRepository;
 import com.myjava.housingapartment.repositories.WaterRepository;
 import com.myjava.housingapartment.web.mappers.ApartmentMapper;
+import com.myjava.housingapartment.web.mappers.DateMapper;
 import com.myjava.housingapartment.web.model.ApartmentWaterDto;
 import com.myjava.housingapartment.web.model.HousingApartmentDto;
 
@@ -24,6 +25,9 @@ public class ApartmentWaterServiceImpl implements ApartmentWaterService{
 
 	@Autowired
 	ApartmentMapper mapper;
+	
+	@Autowired
+	DateMapper dateMapper;
 	
 	@Autowired
 	HousingApartmentRepository apartmentRepository;
@@ -95,14 +99,15 @@ public class ApartmentWaterServiceImpl implements ApartmentWaterService{
 	}
 
 	@Override
-	public ApartmentWaterDto updateApartmetWater(UUID apartmentUUID, UUID waterUUID, ApartmentWaterDto waterDto) {
-		if(!apartmentRepository.existsById(apartmentUUID)) {
-            throw new ResourceNotFoundException("Apartment " + apartmentUUID + " not found");
+	public ApartmentWaterDto updateApartmetWater(UUID waterUUID, ApartmentWaterDto waterDto) {
+		if(!waterRepository.existsById(waterUUID)) {
+            throw new ResourceNotFoundException("Water entity: " + waterUUID + " not found");
         }
 		
-		return mapper.mapWaterObjectToDto(waterRepository.findById(apartmentUUID).map(water -> {
+		return mapper.mapWaterObjectToDto(waterRepository.findById(waterUUID).map(water -> {
 			water.setCouldWater(waterDto.getCouldWater());
 			water.setHotWater(waterDto.getHotWater());
+			water.setMeasurementDate(dateMapper.asTimestamp(waterDto.getMeasurementDate()));
             return waterRepository.save(water);
         }).orElseThrow(() -> new ResourceNotFoundException("water with id " + waterUUID + "not found")));
 		

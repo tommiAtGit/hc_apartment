@@ -78,9 +78,9 @@ class ApartmentElectricityControllerTest {
 		String apartmentJson = objectMapper.writeValueAsString(lib.mockApartmentElectricityDto());
 		log.info(apartmentJson);
 		
-		given(service.updateApartmentElectricity(any(), any(), any())).willReturn(lib.mockApartmentElectricityDto());
+		given(service.updateApartmentElectricity(any(), any())).willReturn(lib.mockApartmentElectricityDto());
 		
-		mockMvc.perform(put("/api/apartmentelectricity/apartment/"+UUID.randomUUID()+"/electricity/" + UUID.randomUUID())
+		mockMvc.perform(put("/api/apartmentelectricity/apartment/electricity/" + UUID.randomUUID())
 				.contentType(MediaType.APPLICATION_JSON).content(apartmentJson))
 				.andExpect(status()
 				.isAccepted());

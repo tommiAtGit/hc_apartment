@@ -14,6 +14,7 @@ import com.myjava.housingapartment.repositories.ApartmentElectricityRepository;
 import com.myjava.housingapartment.repositories.ElectricityRepository;
 import com.myjava.housingapartment.repositories.HousingApartmentRepository;
 import com.myjava.housingapartment.web.mappers.ApartmentMapper;
+import com.myjava.housingapartment.web.mappers.DateMapper;
 import com.myjava.housingapartment.web.model.ApartmentElectricityDto;
 import com.myjava.housingapartment.web.model.HousingApartmentDto;
 
@@ -26,6 +27,9 @@ public class ApartmentElectricityServiceImpl implements ApartmentElectricityServ
 
 	@Autowired
 	ApartmentMapper mapper;
+	
+	@Autowired
+	DateMapper dateMapper;
 	
 	@Autowired
 	HousingApartmentRepository apartmentRepository;
@@ -86,15 +90,18 @@ public class ApartmentElectricityServiceImpl implements ApartmentElectricityServ
 	}
 
 	@Override
-	public ApartmentElectricityDto updateApartmentElectricity(UUID apartmentUUID, UUID electricityId,
+	public ApartmentElectricityDto updateApartmentElectricity(UUID electricityId,
 			ApartmentElectricityDto apartmentElectricity) {
 		
-		if(!apartmentRepository.existsById(apartmentUUID)) {
-            throw new ResourceNotFoundException("Apartment " + apartmentUUID + " not found");
+		
+		if(!electricityRepository.existsById(electricityId)) {
+			log.error("Electricity measurement " + electricityId + " not found");
+            throw new ResourceNotFoundException("electricity measuremnt " + electricityId + " not found");
         }
 		
 		
-		return mapper.mapElectricityObjectToDto(electricityRepository.findById(apartmentUUID).map(electricity -> {
+		return mapper.mapElectricityObjectToDto(electricityRepository.findById(electricityId).map(electricity -> {
+			electricity.setMeasurementDate(dateMapper.asTimestamp(apartmentElectricity.getMeasurementDate()));
 			electricity.setMeasurement(apartmentElectricity.getMeasurement());
             return electricityRepository.save(electricity);
         }).orElseThrow(() -> new ResourceNotFoundException("Electricity with id " + electricityId + "not found")));

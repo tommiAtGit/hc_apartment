@@ -10,6 +10,6 @@ public interface ApartmentWaterService {
 	ApartmentWaterDto addApartmentWater(UUID apartmentUUID, ApartmentWaterDto waterDto);
 	List<ApartmentWaterDto> getApartmentWater(UUID apartmentUUID);
 	Boolean deleteApartmentWater(UUID waterUUID);
-	ApartmentWaterDto updateApartmetWater(UUID apartmentUUID, UUID waterUUDI, ApartmentWaterDto waterDto);
+	ApartmentWaterDto updateApartmetWater(UUID waterUUDI, ApartmentWaterDto waterDto);
 	
 }
