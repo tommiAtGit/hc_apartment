@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -112,10 +113,36 @@ public class ApartmentElectricityServiceImpl implements ApartmentElectricityServ
 	@Override
 	public ApartmentElectricityDto getHousingApartmenElectricityConsumption(UUID apartmentUUID,OffsetDateTime startTime, OffsetDateTime endTime) {
 		
-		//Get electricity consumption at start date
+		if (apartmentUUID.equals(null)) {
+			log.error("Apartment UUID parameter missing");
+			throw new IllegalArgumentException();
+		}
 		
-		//Get electricity consumption at end date
-		return null;
+		List <ApartmentElectricityDto> apartmentElectricityDtos = this.getApartmentElecricity(apartmentUUID);
+		if (apartmentElectricityDtos.equals(null)) {
+			log.error("Apartment not found with UUID: " + apartmentUUID );
+			throw new IllegalArgumentException();
+		}
+		//Get electricity consumption of start date 
+		ApartmentElectricityDto startResult = (ApartmentElectricityDto) apartmentElectricityDtos
+				.stream()
+				.filter(e -> e.getMeasurementDate() == startTime)
+                .collect(Collectors.toList());
+		
+        
+		//Get water consumption of end date 
+		ApartmentElectricityDto endResult = (ApartmentElectricityDto) apartmentElectricityDtos
+				.stream()
+				.filter(e -> e.getMeasurementDate() == endTime)
+                .collect(Collectors.toList());
+		
+		double electricityDelta = endResult.getMeasurement()  - startResult.getMeasurement();
+		
+		endResult.setMeasurement(electricityDelta);
+		
+		
+		return endResult;
+		
 	}
 
 }
