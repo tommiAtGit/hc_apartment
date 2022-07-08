@@ -1,5 +1,6 @@
 package com.myjava.housingapartment.web.service;
 
+import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -11,5 +12,7 @@ public interface ApartmentElectricityService {
 	ApartmentElectricityDto updateApartmentElectricity(UUID electricityId, ApartmentElectricityDto apartmentElectricity);
 	List<ApartmentElectricityDto> getApartmentElecricity(UUID apartmentUUID);
 	Boolean deleteApartmentElectricity(UUID electricityUUID);
+	ApartmentElectricityDto getHousingApartmenElectricityConsumption(UUID apartmentUUID,OffsetDateTime startTime, OffsetDateTime endTime);
+	
 	
 }

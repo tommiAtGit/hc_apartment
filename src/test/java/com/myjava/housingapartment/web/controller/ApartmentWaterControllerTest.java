@@ -9,6 +9,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.time.OffsetDateTime;
 import java.util.UUID;
 
 import org.junit.jupiter.api.AfterEach;
@@ -106,6 +107,31 @@ class ApartmentWaterControllerTest {
 				.andExpect(status()
 				.isNotFound());
 		
+	}
+	
+	@Test
+	void calculateApartmentWaterConsumptionTest()throws Exception{
+		when(service.getHousingApartmentWaterConsumption(any(),any(), any())).thenReturn(lib.mockApartmentWaterDto());
+		
+		String startTime = OffsetDateTime.now().minusDays(1).toString();
+		String endTime = OffsetDateTime.now().plusDays(1).toString();
+		mockMvc.perform(get("/api/apartmentwater/apartment/waterConsumption/" + UUID.randomUUID() +"?start=" +startTime+"&end="+endTime)
+				.accept(MediaType.APPLICATION_JSON))
+				.andExpect(status()
+				.isOk());
+	}
+	
+	@Test
+	void calculateApartmentWaterConsumptionBadRequestTest()throws Exception{
+		when(service.getHousingApartmentWaterConsumption(any(),any(), any())).thenReturn(lib.mockApartmentWaterDto());
+		
+		// End data before start date
+		String startTime = OffsetDateTime.now().plusDays(1).toString();
+		String endTime = OffsetDateTime.now().minusDays(1).toString();
+		mockMvc.perform(get("/api/apartmentwater/apartment/waterConsumption/" + UUID.randomUUID() +"?start=" +startTime+"&end="+endTime)
+				.accept(MediaType.APPLICATION_JSON))
+				.andExpect(status()
+				.isConflict());
 	}
 	
 	

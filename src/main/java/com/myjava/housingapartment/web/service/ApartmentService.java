@@ -1,6 +1,6 @@
 package com.myjava.housingapartment.web.service;
 
-import java.util.UUID; 
+import java.util.UUID;
 import java.util.List;
 
 import com.myjava.housingapartment.web.model.HousingApartmentDto;
