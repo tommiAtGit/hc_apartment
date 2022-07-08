@@ -64,13 +64,7 @@ public class ApartmentElectricityController {
 		
 		
 		
-		/**
-		 * public void processDateTime(@RequestParam("start") 
-                            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) 
-                            LocalDateTime date) {
-        // The rest of your code (Spring already parsed the date).
-}
-		 */
+	
 		log.info("Get Apartment electricity consumption called with id: " + apartmentUUID);
 		log.info("Start time: " + startTime);
 		log.info("End Time: " + endTime);

@@ -136,7 +136,6 @@ public class ApartmentElectricityServiceImpl implements ApartmentElectricityServ
 				.filter(e -> e.getMeasurementDate() == endTime)
                 .collect(Collectors.toList());
 		
-		// Calculate hot water delta
 		double electricityDelta = endResult.getMeasurement()  - startResult.getMeasurement();
 		
 		endResult.setMeasurement(electricityDelta);
