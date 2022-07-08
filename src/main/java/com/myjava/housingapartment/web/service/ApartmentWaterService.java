@@ -1,5 +1,6 @@
 package com.myjava.housingapartment.web.service;
 
+import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -11,5 +12,6 @@ public interface ApartmentWaterService {
 	List<ApartmentWaterDto> getApartmentWater(UUID apartmentUUID);
 	Boolean deleteApartmentWater(UUID waterUUID);
 	ApartmentWaterDto updateApartmetWater(UUID waterUUDI, ApartmentWaterDto waterDto);
+	ApartmentWaterDto getHousingApartmentWaterConsumption(UUID apartmentUUID,OffsetDateTime startTime, OffsetDateTime endTime);
 	
 }

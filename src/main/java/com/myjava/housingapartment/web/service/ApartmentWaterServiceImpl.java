@@ -1,8 +1,10 @@
 package com.myjava.housingapartment.web.service;
 
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -110,6 +112,43 @@ public class ApartmentWaterServiceImpl implements ApartmentWaterService{
 			water.setMeasurementDate(dateMapper.asTimestamp(waterDto.getMeasurementDate()));
             return waterRepository.save(water);
         }).orElseThrow(() -> new ResourceNotFoundException("water with id " + waterUUID + "not found")));
+		
+	}
+	
+	@Override
+	public ApartmentWaterDto getHousingApartmentWaterConsumption(UUID apartmentUUID,OffsetDateTime startTime, OffsetDateTime endTime) {
+		
+		if (apartmentUUID.equals(null)) {
+			log.error("Apartment UUID parameter missing");
+			throw new IllegalArgumentException();
+		}
+		
+		List <ApartmentWaterDto> apartmentWaterDtos = this.getApartmentWater(apartmentUUID);
+		if (apartmentWaterDtos.equals(null)) {
+			log.error("Apartmentnot found with UUID: " + apartmentUUID );
+			throw new IllegalArgumentException();
+		}
+		//Get water consumption of start date 
+		ApartmentWaterDto startResult = (ApartmentWaterDto) apartmentWaterDtos
+				.stream()
+				.filter(w -> w.getMeasurementDate() == startTime)
+                .collect(Collectors.toList());
+		
+        
+		//Get water consumption of end date 
+		ApartmentWaterDto endResult = (ApartmentWaterDto) apartmentWaterDtos
+				.stream()
+				.filter(w -> w.getMeasurementDate() == endTime)
+                .collect(Collectors.toList());
+		
+		// Calculate hot water delta
+		double hotwaterDelta = endResult.getHotWater() - startResult.getHotWater();
+		double coldWaterDelta = endResult.getCouldWater() - endResult.getCouldWater();
+		
+		endResult.setHotWater(hotwaterDelta);
+		endResult.setCouldWater(coldWaterDelta);
+		
+		return endResult;
 		
 	}
 

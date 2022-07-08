@@ -1,5 +1,6 @@
 package com.myjava.housingapartment.web.service;
 
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 
 import java.util.List;
@@ -106,6 +107,15 @@ public class ApartmentElectricityServiceImpl implements ApartmentElectricityServ
             return electricityRepository.save(electricity);
         }).orElseThrow(() -> new ResourceNotFoundException("Electricity with id " + electricityId + "not found")));
 
+	}
+	
+	@Override
+	public ApartmentElectricityDto getHousingApartmenElectricityConsumption(UUID apartmentUUID,OffsetDateTime startTime, OffsetDateTime endTime) {
+		
+		//Get electricity consumption at start date
+		
+		//Get electricity consumption at end date
+		return null;
 	}
 
 }
