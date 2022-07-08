@@ -1,11 +1,13 @@
 package com.myjava.housingapartment.web.controller;
 
+import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.UUID;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.myjava.housingapartment.web.model.ApartmentElectricityDto;
@@ -54,6 +57,38 @@ public class ApartmentElectricityController {
 		
 	}
 	
+	@GetMapping("apartment/electricityConsumption/{apartmentUUID}")
+	public ResponseEntity<ApartmentElectricityDto> getApartmentWaterConsumption(@PathVariable("apartmentUUID")UUID apartmentUUID, 
+			@RequestParam("start") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) OffsetDateTime startTime,
+			@RequestParam("end") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) OffsetDateTime endTime ){
+		
+		
+		
+		/**
+		 * public void processDateTime(@RequestParam("start") 
+                            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) 
+                            LocalDateTime date) {
+        // The rest of your code (Spring already parsed the date).
+}
+		 */
+		log.info("Get Apartment electricity consumption called with id: " + apartmentUUID);
+		log.info("Start time: " + startTime);
+		log.info("End Time: " + endTime);
+		
+		
+		
+		if (startTime.equals(null)| endTime.equals(null)) {
+			log.error("Start time or end time missings");
+			return new ResponseEntity<ApartmentElectricityDto>(HttpStatus.BAD_REQUEST);
+		}
+		if (endTime.isBefore(startTime)) {
+			log.error("Start time before end time");
+			return new ResponseEntity<ApartmentElectricityDto>(HttpStatus.CONFLICT);
+		}
+		
+		return new ResponseEntity<ApartmentElectricityDto>(service.getHousingApartmenElectricityConsumption(apartmentUUID, startTime, endTime),HttpStatus.OK);
+		
+	}
 	
 	@PutMapping("apartment/electricity/{electricityId}")
 	public ResponseEntity<ApartmentElectricityDto>updateElectricity( @PathVariable (value = "electricityId") UUID electricityId,
