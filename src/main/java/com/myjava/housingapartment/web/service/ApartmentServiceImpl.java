@@ -3,6 +3,8 @@ package com.myjava.housingapartment.web.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.myjava.housingapartment.domain.HousingApartment;
@@ -55,11 +57,10 @@ public class ApartmentServiceImpl implements ApartmentService {
 
 
 	@Override
-	public void deleteHosingApartment(UUID apartmentUUID) {
+	public void deleteHousingApartment(HousingApartmentDto apartmentDto) {
 		
-		if (apartmentUUID != null) {
-			HousingApartment apartment = repository.findById(apartmentUUID).orElseThrow();
-			repository.delete(apartment);
+		if (apartmentDto != null) {
+			repository.delete(mapper.mapDtoToObject(apartmentDto));
 		}
 		
 	}
@@ -79,8 +80,27 @@ public class ApartmentServiceImpl implements ApartmentService {
 		}
 		return null;
 	}
-	
-	
+
+	@Override
+	public List<HousingApartmentDto> getCooperativeApartments(UUID cooperativeUUID) {
+		
+		List<HousingApartmentDto> aptDtos = new ArrayList<HousingApartmentDto>();
+
+		if(cooperativeUUID != null){
+			List<HousingApartment> apartments = (List<HousingApartment>) repository.findAll();
+			if (apartments != null){
+				List<HousingApartment> coopApartments = apartments
+					.stream()
+					.filter(c->c.getCooperativeUUID().equals(cooperativeUUID))
+					.collect(Collectors.toList());
+				
+				coopApartments.forEach(apt -> aptDtos.add(mapper.mapObjectToDto(apt)));	
+				
+				return aptDtos;
+			}
+		}
+		return null;
+	}
 	
 
 	

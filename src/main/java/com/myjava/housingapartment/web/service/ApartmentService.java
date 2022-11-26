@@ -11,7 +11,8 @@ public interface ApartmentService {
 	HousingApartmentDto getHousingApartment(UUID apartmentUUID);
 	List<HousingApartmentDto> getHousingApartments();
 	HousingApartmentDto getHousingApartmentByName(String apartmentName);
-	void deleteHosingApartment(UUID ApartmentUUID);
+	void deleteHousingApartment(HousingApartmentDto apartmentDto);
+	List<HousingApartmentDto> getCooperativeApartments(UUID cooperativeUUID);
 	
 	
 	
