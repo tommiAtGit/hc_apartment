@@ -8,6 +8,6 @@ class HousingApartmentApplicationTests {
 
 	@Test
 	void contextLoads() {
-	}
+		}
 
 }
