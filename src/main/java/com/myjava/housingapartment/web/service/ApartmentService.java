@@ -13,6 +13,7 @@ public interface ApartmentService {
 	HousingApartmentDto getHousingApartmentByName(String apartmentName);
 	void deleteHousingApartment(HousingApartmentDto apartmentDto);
 	List<HousingApartmentDto> getCooperativeApartments(UUID cooperativeUUID);
+	HousingApartmentDto updateApartmet(UUID apartmentUUID, HousingApartmentDto apartmentDto);
 	
 	
 	
