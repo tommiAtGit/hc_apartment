@@ -90,7 +90,7 @@ class ApartmentWaterControllerTest {
 		
 		when(service.deleteApartmentWater(any())).thenReturn(true);
 		
-		mockMvc.perform(delete("/api/apartmentwater/water/" + UUID.randomUUID())
+		mockMvc.perform(delete("/api/apartmentwater/apartment/water/" + UUID.randomUUID())
 				.accept(MediaType.APPLICATION_JSON))
 				.andExpect(status()
 				.isOk());

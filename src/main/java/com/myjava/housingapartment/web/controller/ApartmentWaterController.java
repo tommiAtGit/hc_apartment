@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -99,5 +100,15 @@ public class ApartmentWaterController {
 		return new ResponseEntity<ApartmentWaterDto>(service.updateApartmetWater( waterId, waterDto),HttpStatus.ACCEPTED);
 	}
 	
+	@DeleteMapping("apartment/water/{waterId}")
+	public ResponseEntity<Boolean>deleteWater(
+			@PathVariable (value = "waterId") UUID waterId
+			 ){
+		
+		
+		log.info("Delete entity with water id: " + waterId);
+		
+		return new ResponseEntity<Boolean>(service.deleteApartmentWater(waterId),HttpStatus.OK);
+	}
 
 }

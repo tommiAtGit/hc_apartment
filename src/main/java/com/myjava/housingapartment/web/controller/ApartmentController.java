@@ -29,7 +29,7 @@ public class ApartmentController {
 	
 	@PostMapping
 	public  ResponseEntity<HousingApartmentDto> addNewApartment( @Validated @RequestBody HousingApartmentDto apartmentDto){
-		
+
 		log.info("New apartment added with name: " + apartmentDto.getApartment());
 		return new ResponseEntity<HousingApartmentDto>(apartmentService.addHousingAparment(apartmentDto),HttpStatus.CREATED);
 	}
