@@ -43,8 +43,8 @@ public class ApartmentWater {
 	private Double hotWater;
 	@Column(name = "measure_date")
 	private Timestamp measurementDate;
-	 @ManyToOne(fetch = FetchType.LAZY, optional = false)
-	 @JoinColumn(name = "apartment_uuid", nullable = false)
+	 @ManyToOne(fetch = FetchType.EAGER, optional = false)
+	 @JoinColumn(name = "apartment_uuid",referencedColumnName="ApartmentUUID", nullable = false)
 	 @OnDelete(action = OnDeleteAction.CASCADE)
 	 @JsonIgnore
 	 HousingApartment apartment;

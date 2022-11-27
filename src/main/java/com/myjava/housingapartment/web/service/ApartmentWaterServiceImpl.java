@@ -43,15 +43,20 @@ public class ApartmentWaterServiceImpl implements ApartmentWaterService{
 	@Override
 	public ApartmentWaterDto addApartmentWater(UUID apartmentUUID, ApartmentWaterDto waterDto) {
 		
-		waterDto.setHc_apartment(mapper.mapObjectToDto(apartmentRepository.findById(apartmentUUID).orElseThrow()));
+		try {
+			waterDto.setHc_apartment(mapper.mapObjectToDto(apartmentRepository.findById(apartmentUUID).orElseThrow()));	
+		} catch (Exception e) {
+			throw new ResourceNotFoundException(" Apartment" + apartmentUUID + " not found"); 
+		}
 		
-		if (waterDto.getCouldWater() != null) {
+		
+		if (waterDto.getCouldWater() != null && waterDto.getHotWater() != null ) {
 			return mapper.mapWaterObjectToDto(
 					apartmenWaterRepository.save(
 							mapper.mapWaterDtoToObject(waterDto)));	
 		}
 		else {
-			log.error("Apartment" + apartmentUUID + " not found");
+			log.error("Apartment" + apartmentUUID + " has no water entry");
 			throw new ResourceNotFoundException(" Apartment" + apartmentUUID + " not found"); 
 		}
 		

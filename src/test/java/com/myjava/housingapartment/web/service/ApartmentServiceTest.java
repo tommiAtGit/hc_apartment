@@ -10,6 +10,8 @@ import java.util.UUID;
 
 import com.myjava.housingapartment.exception.ResourceNotFoundException;
 import com.myjava.housingapartment.test.utils.ApartmentMockLibrary;
+import com.myjava.housingapartment.web.model.ApartmentElectricityDto;
+import com.myjava.housingapartment.web.model.ApartmentWaterDto;
 import com.myjava.housingapartment.web.model.HousingApartmentDto;
 
 import org.junit.jupiter.api.AfterEach;
@@ -24,6 +26,12 @@ public class ApartmentServiceTest {
     
     @Autowired
     ApartmentService service;
+    
+    @Autowired
+    ApartmentWaterService waterService;
+
+    @Autowired
+    ApartmentElectricityService electricityService;
 
     ApartmentMockLibrary lib = null;
 
@@ -108,7 +116,70 @@ public class ApartmentServiceTest {
             service.deleteHousingApartment(a1);
             assertTrue(true);
         }
+    }
+
+    @Test
+    void apartmentDeleteTest(){
+        HousingApartmentDto apartment_1 = lib.mockApartmentDto();
+        HousingApartmentDto a1 = service.addHousingAparment(apartment_1);
+        assertNotNull(a1);
+
+        ApartmentWaterDto apartmentWater = lib.mockApartmentWaterDto();
+        ApartmentWaterDto w1 = waterService.addApartmentWater(a1.getApartmentUUID(),apartmentWater);
+        assertNotNull(w1);
+
+        ApartmentElectricityDto apartmentElectricity = lib.mockApartmentElectricityDto();
+        ApartmentElectricityDto e1 = electricityService.addApartmentElectricity(a1.getApartmentUUID(),apartmentElectricity);
+        assertNotNull(e1);
+
+        try {
+            service.deleteHousingApartment(a1);
+            assertTrue(true);
+        } catch (Exception e) {
+           assertFalse(false);
+        }
         
+    }
+    @Test
+    void apartmentDeleteMultipleApartmentsTest(){
+        HousingApartmentDto apartment_1 = lib.mockApartmentDto();
+        HousingApartmentDto apartment_2 = lib.mockApartmentDto();
+        HousingApartmentDto a1 = service.addHousingAparment(apartment_1);
+        HousingApartmentDto a2 = service.addHousingAparment(apartment_2);
+        assertNotNull(a1);
+        assertNotNull(a2);
+
+        ApartmentWaterDto apartmentWater = lib.mockApartmentWaterDto();
+        ApartmentWaterDto w1 = waterService.addApartmentWater(a1.getApartmentUUID(),apartmentWater);
+        ApartmentWaterDto w2 = waterService.addApartmentWater(a2.getApartmentUUID(),apartmentWater);
+        assertNotNull(w1);
+        assertNotNull(w2);
+
+        ApartmentElectricityDto apartmentElectricity = lib.mockApartmentElectricityDto();
+        ApartmentElectricityDto e1 = electricityService.addApartmentElectricity(a1.getApartmentUUID(),apartmentElectricity);
+        ApartmentElectricityDto e2 = electricityService.addApartmentElectricity(a2.getApartmentUUID(),apartmentElectricity);
+        assertNotNull(e1);
+        assertNotNull(e2);
+
+        try {
+            service.deleteHousingApartment(a1);
+            assertTrue(true);
+        } catch (Exception e) {
+           assertFalse(false);
+        }
+        HousingApartmentDto actual = service.getHousingApartment(a2.getApartmentUUID());
+        assertNotNull(actual);
+        List<ApartmentElectricityDto> electricitydtos = electricityService.getApartmentElecricity(a2.getApartmentUUID());
+        assertEquals(1, electricitydtos.size());
+        List<ApartmentWaterDto> waterDtos = waterService.getApartmentWater(a2.getApartmentUUID());
+        assertEquals(1, waterDtos.size());
+
+        try {
+            service.deleteHousingApartment(a2);
+            assertTrue(true);
+        } catch (Exception e) {
+           assertFalse(false);
+        }
 
     }
 

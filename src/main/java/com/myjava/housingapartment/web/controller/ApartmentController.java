@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -56,10 +57,30 @@ public class ApartmentController {
 	public ResponseEntity<HousingApartmentDto>updateApartment(
 			@PathVariable (value = "apartmentId") UUID apartmentId,
 			@Valid @RequestBody HousingApartmentDto apartmentDto ){
-		
-		
 		log.info("Edit entity with apartment id: " + apartmentId);
 		return new ResponseEntity<HousingApartmentDto>(apartmentService.updateApartmet( apartmentId, apartmentDto),HttpStatus.ACCEPTED);
+	}
+
+	@DeleteMapping("apartment/{apartmentId}")
+	public ResponseEntity<Boolean>deleteApartment(
+			@PathVariable (value = "apartmentId") UUID apartmentId,
+			@Valid @RequestBody HousingApartmentDto apartmentDto ){
+		
+		
+		log.info("Delete entity with apartment id: " + apartmentId);
+		if (apartmentDto != null){
+			try {
+				apartmentService.deleteHousingApartment(apartmentDto);
+				return new ResponseEntity<Boolean>(true,HttpStatus.OK);
+			} catch (Exception e) {
+				log.error("Error occured while deleting apartment ");
+				return new ResponseEntity<Boolean>(false,HttpStatus.INTERNAL_SERVER_ERROR);
+			}
+		}
+		else{
+			log.error("No apartment available while deleting apartment");
+			return new ResponseEntity<Boolean>(false,HttpStatus.BAD_REQUEST);
+		}
 	}
 	
 	
