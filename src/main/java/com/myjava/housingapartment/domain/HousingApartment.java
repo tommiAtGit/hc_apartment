@@ -28,7 +28,7 @@ public class HousingApartment {
 	@Id
 	@GeneratedValue(generator="UUID")
 	@GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-	@Column(length = 16, columnDefinition = "BINARY(16)", updatable = false, nullable = false)
+	@Column(name="ApartmentUUID",length = 16, columnDefinition = "BINARY(16)", updatable = false, nullable = false)
 	private UUID apartmentUUID;
 	@Column(name="CooperativeUUID")
 	private UUID cooperativeUUID;
