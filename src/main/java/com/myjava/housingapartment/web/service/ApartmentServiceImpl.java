@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.myjava.housingapartment.domain.HousingApartment;
+import com.myjava.housingapartment.exception.ResourceNotFoundException;
 import com.myjava.housingapartment.repositories.HousingApartmentRepository;
 import com.myjava.housingapartment.web.mappers.ApartmentMapper;
 import com.myjava.housingapartment.web.model.HousingApartmentDto;
@@ -100,6 +101,27 @@ public class ApartmentServiceImpl implements ApartmentService {
 			}
 		}
 		return null;
+	}
+
+	@Override
+	public HousingApartmentDto updateApartmet(UUID apartmentUUID, HousingApartmentDto apartmentDto) {
+		
+		log.info("Update apartment information...");
+		if(!repository.existsById(apartmentUUID)) {
+            throw new ResourceNotFoundException("Aprtment entity: " + apartmentUUID + " not found");
+        }
+		
+		if(apartmentDto.equals(null)){
+			throw new NullPointerException("Object to be updated was null " + apartmentUUID);
+		}
+		return mapper.mapObjectToDto(repository.findById(apartmentUUID).map(apartment -> {
+			apartment.setApartment(apartmentDto.getApartment());
+			apartment.setApartmentUUID(apartmentDto.getApartmentUUID());
+			apartment.setCooperativeUUID(apartmentDto.getCooperativeUUID());
+			apartment.setUserUUID(apartmentDto.getUserUUID());
+            return repository.save(apartment);
+        }).orElseThrow(() -> new ResourceNotFoundException("Apartment with id " + apartmentUUID + "not found")));
+		
 	}
 	
 
