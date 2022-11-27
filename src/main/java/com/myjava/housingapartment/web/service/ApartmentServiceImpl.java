@@ -105,10 +105,15 @@ public class ApartmentServiceImpl implements ApartmentService {
 
 	@Override
 	public HousingApartmentDto updateApartmet(UUID apartmentUUID, HousingApartmentDto apartmentDto) {
+		
+		log.info("Update apartment information...");
 		if(!repository.existsById(apartmentUUID)) {
-            throw new ResourceNotFoundException("Water entity: " + apartmentUUID + " not found");
+            throw new ResourceNotFoundException("Aprtment entity: " + apartmentUUID + " not found");
         }
 		
+		if(apartmentDto.equals(null)){
+			throw new NullPointerException("Object to be updated was null " + apartmentUUID);
+		}
 		return mapper.mapObjectToDto(repository.findById(apartmentUUID).map(apartment -> {
 			apartment.setApartment(apartmentDto.getApartment());
 			apartment.setApartmentUUID(apartmentDto.getApartmentUUID());
